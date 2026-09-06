@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scan Opportunity Radar</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark">S</span>
+          <div>
+            <strong>Scan Radar</strong>
+            <span>AWS local demo</span>
+          </div>
+        </div>
+
+        <nav class="nav-list" aria-label="Views">
+          <a href="#overview" class="active">Overview</a>
+          <a href="#ranking">Ranking</a>
+          <a href="#insights">Insights</a>
+          <a href="#pipeline">Pipeline</a>
+        </nav>
+
+        <section class="pipeline-card" id="pipeline">
+          <div>
+            <span class="label">Pipeline</span>
+            <strong id="runState">Idle</strong>
+          </div>
+          <button id="runButton" type="button">Run</button>
+          <label class="toggle-row">
+            <input id="bedrockToggle" type="checkbox" />
+            <span>Use Bedrock</span>
+          </label>
+        </section>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">S3 raw -> SQS -> worker -> DynamoDB -> S3 curated</p>
+            <h1>Scan Opportunity Radar</h1>
+          </div>
+          <div class="status-pill" id="healthStatus">Checking</div>
+        </header>
+
+        <section class="kpi-grid" id="overview" aria-label="Resumo"></section>
+
+        <section class="content-grid">
+          <section class="panel ranking-panel" id="ranking">
+            <div class="panel-header">
+              <div>
+                <span class="label">Recomendacoes</span>
+                <h2>Prioridade por produto</h2>
+              </div>
+              <div class="filters">
+                <input id="searchInput" type="search" placeholder="Buscar" />
+                <select id="actionFilter" aria-label="Filtrar por acao">
+                  <option value="">Todas as acoes</option>
+                </select>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Produto</th>
+                    <th>Acao</th>
+                    <th>Score</th>
+                    <th>Gap</th>
+                    <th>Potencial</th>
+                  </tr>
+                </thead>
+                <tbody id="rankingBody"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <aside class="side-column">
+            <section class="panel" id="insights">
+              <div class="panel-header compact">
+                <div>
+                  <span class="label">Bedrock</span>
+                  <h2>Insights</h2>
+                </div>
+              </div>
+              <div id="insightsBody" class="insights"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header compact">
+                <div>
+                  <span class="label">Datadog</span>
+                  <h2>Observabilidade</h2>
+                </div>
+              </div>
+              <div class="observability" id="observabilityBody">
+                <p>Carregando telemetria...</p>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header compact">
+                <div>
+                  <span class="label">Arquitetura</span>
+                  <h2>Servicos</h2>
+                </div>
+              </div>
+              <ol class="flow-list">
+                <li><span>S3 raw</span><small>recebe XLSX</small></li>
+                <li><span>SQS</span><small>evento ObjectCreated</small></li>
+                <li><span>Worker</span><small>score + racional</small></li>
+                <li><span>DynamoDB</span><small>top recomendacoes</small></li>
+                <li><span>S3 curated</span><small>CSV, JSON e insights</small></li>
+              </ol>
+            </section>
+          </aside>
+        </section>
+
+        <section class="panel log-panel">
+          <div class="panel-header compact">
+            <div>
+              <span class="label">Execucao</span>
+              <h2>Ultimo run</h2>
+            </div>
+          </div>
+          <pre id="runLog">Aguardando execucao.</pre>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

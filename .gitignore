@@ -1,0 +1,18 @@
+# Local runtime state and generated pipeline artifacts
+run-state/*
+!run-state/.gitkeep
+
+# Python and Node.js caches
+__pycache__/
+*.py[cod]
+node_modules/
+
+# Local input data from the Scan case
+data/
+*.xlsx
+
+# Local environment and editor files
+.env
+.env.*
+.vscode/
+.idea/
