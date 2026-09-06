@@ -2,8 +2,7 @@
 
 Demo de um radar de oportunidades comerciais para a Scan. O projeto transforma
 um XLSX de produtos em recomendacoes priorizadas, potencial estimado de receita
-e insights acionaveis, usando uma arquitetura AWS simulada localmente com
-LocalStack.
+e insights acionaveis, usando Stack AWS.
 
 > Este repositorio e uma prova de conceito local. O arquivo XLSX do case nao e
 > versionado; forneca o arquivo de entrada localmente antes de executar o
