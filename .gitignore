@@ -7,10 +7,6 @@ __pycache__/
 *.py[cod]
 node_modules/
 
-# Local input data from the Scan case
-data/
-*.xlsx
-
 # Local environment and editor files
 .env
 .env.*
